@@ -54,10 +54,12 @@ export default function ContainerQuest({
   const progress = totalQuestions
     ? ((currentQuestion + 1) / totalQuestions) * 100
     : 0;
+
   const isLastQuestion = currentQuestion === totalQuestions - 1;
 
   useEffect(() => {
     const html = document.documentElement;
+
     if (theme === "2") {
       html.classList.add("light");
       html.classList.remove("dark");
@@ -70,14 +72,18 @@ export default function ContainerQuest({
   return (
     <div>
       <section
-        className={`relative flex items-center justify-center overflow-hidden h-full dark:bg-[url('/images/oro-ad/bg_leadscore.webp')] light:bg-[url('/images/oro/splashScreen.webp')] bg-cover bg-center`}
+        className={`relative flex items-center justify-center overflow-hidden h-full dark:bg-[url('/images/bg_quiz.webp')] light:bg-[url('/images/oro/splashScreen.webp')] bg-cover bg-center`}
       >
         <div className="container mx-auto relative h-full px-4">
           <div className="flex flex-col items-center justify-center text-center py-8">
             <div className="w-full max-w-4xl mx-auto">
               <div className="mb-6 md:mb-8 flex justify-center">
                 <Image
-                  src={theme === "1" ? "/images/oro-ad/logo-oro-dark.webp" : "/images/logo-oro-dark.webp"}
+                  src={
+                    theme === "1"
+                      ? "/images/logo_quiz.webp"
+                      : "/images/logo_quiz.webp"
+                  }
                   alt="Logotipo Resgate dos otimistas"
                   width={424}
                   height={164}
@@ -95,6 +101,7 @@ export default function ContainerQuest({
               >
                 FALTA APENAS UM PASSO
               </h1>
+
               <h2
                 className={`text-2xl md:text-5xl font-bold dark:text-custom-primary-gold mb-4 md:mb-7 text-center light:text-[#006D71]`}
               >
@@ -109,7 +116,7 @@ export default function ContainerQuest({
               </p>
 
               <div className="w-full max-w-2xl mx-auto">
-                <div className="bg-zinc-900 rounded-lg border border-white p-4 md:p-7 mb-6 md:mb-8 ">
+                <div className="bg-zinc-900 rounded-lg border border-white p-4 md:p-7 mb-6 md:mb-8">
                   {isFetchingQuestions && (
                     <div className="text-white text-center py-8">
                       Carregando perguntas...
@@ -119,6 +126,7 @@ export default function ContainerQuest({
                   {!isFetchingQuestions && fetchError && (
                     <div className="text-center py-4">
                       <p className="text-red-300 mb-4">{fetchError}</p>
+
                       <Button
                         onClick={fetchQuestions}
                         className="bg-teal-600 hover:bg-teal-700 text-white"
@@ -128,113 +136,134 @@ export default function ContainerQuest({
                     </div>
                   )}
 
-                  {!isFetchingQuestions && !fetchError && currentQuestionData && (
-                    <>
-                      {submitError && (
-                        <p className="text-red-300 text-sm mb-3 text-left">
-                          {submitError}
-                        </p>
-                      )}
-                      {submitSuccess && (
-                        <p className="!text-green-300 text-sm mb-3 text-left">
-                          Respostas enviadas com sucesso.
-                        </p>
-                      )}
-
-                      <div className="mb-4">
-                        <div className="w-full bg-white/20 rounded-full h-2">
-                          <div
-                            className="bg-teal-500 h-2 rounded-full transition-all duration-300"
-                            style={{ width: `${progress}%` }}
-                          />
-                        </div>
-                      </div>
-
-                      <h3
-                        className="text-white text-base md:text-lg font-medium mb-4 md:mb-5 md:text-left text-center"
-                        style={{
-                          color: "#fff",
-                          fontFamily: '"Roboto", Sans-serif',
-                        }}
-                      >
-                        {currentQuestionData.question}
-                      </h3>
-
-                      {isOpenInputType(currentQuestionData.inputType) ? (
-                        <input
-                          type="text"
-                          value={selectedSingleValue}
-                          onChange={(e) => handleAnswer(e.target.value)}
-                          placeholder="Digite sua resposta aqui..."
-                          className="w-full px-4 py-3 rounded-lg border border-white bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                          style={{ fontFamily: '"Roboto", Sans-serif' }}
-                        />
-                      ) : isMultipleInputType(currentQuestionData.inputType) ? (
-                        <div className="space-y-2">
-                          {currentQuestionData.options.map((option) => {
-                            const checked = selectedMultipleValue.includes(
-                              option.value
-                            );
-                            return (
-                              <button
-                                key={option.value}
-                                type="button"
-                                onClick={() => handleMultipleAnswer(option.value)}
-                                className="w-full text-left flex items-center gap-2 text-white"
-                              >
-                                <span
-                                  className={`h-4 w-4 border border-white rounded-sm inline-flex items-center justify-center ${checked ? "bg-white" : "bg-transparent"
-                                    }`}
-                                >
-                                  {checked && (
-                                    <span className="h-2 w-2 bg-teal-700 rounded-sm" />
-                                  )}
-                                </span>
-                                <span>{option.label}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <CustomRadio
-                          style={{ fontFamily: '"Roboto", Sans-serif' }}
-                          options={currentQuestionData.options}
-                          value={selectedSingleValue}
-                          onChange={handleAnswer}
-                        />
-                      )}
-
-                      <div className="grid grid-cols-2 gap-3 md:gap-5 mt-5 md:mt-7">
-                        {currentQuestion > 0 ? (
-                          <Button
-                            variant="outline"
-                            onClick={handleBack}
-                            className="bg-transparent border-gray-700 text-white hover:bg-gray-800 py-3 md:py-5 text-sm md:text-base"
-                            style={{ fontFamily: '"Roboto", Sans-serif' }}
-                          >
-                            VOLTAR
-                          </Button>
-                        ) : (
-                          <div />
+                  {!isFetchingQuestions &&
+                    !fetchError &&
+                    currentQuestionData && (
+                      <>
+                        {submitError && (
+                          <p className="text-red-300 text-sm mb-3 text-left">
+                            {submitError}
+                          </p>
                         )}
-                        <Button
-                          onClick={handleNext}
-                          disabled={!isCurrentQuestionAnswered || isSubmittingAnswers}
-                          className={`bg-teal-600 hover:bg-teal-700 text-white py-3 md:py-5 text-sm md:text-base ${currentQuestion === 0 ? "col-span-2" : ""
-                            }`}
-                          style={{ fontFamily: '"Roboto", Sans-serif' }}
+
+                        {submitSuccess && (
+                          <p className="!text-green-300 text-sm mb-3 text-left">
+                            Respostas enviadas com sucesso.
+                          </p>
+                        )}
+
+                        <div className="mb-4">
+                          <div className="w-full bg-white/20 rounded-full h-2">
+                            <div
+                              className="bg-teal-500 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${progress}%` }}
+                            />
+                          </div>
+                        </div>
+
+                        <h3
+                          className="text-white text-base md:text-lg font-medium mb-4 md:mb-5 md:text-left text-center"
+                          style={{
+                            color: "#fff",
+                            fontFamily: '"Roboto", Sans-serif',
+                          }}
                         >
-                          {isLastQuestion
-                            ? isSubmittingAnswers
-                              ? "ENVIANDO..."
-                              : submitSuccess
+                          {currentQuestionData.question}
+                        </h3>
+
+                        {isOpenInputType(currentQuestionData.inputType) ? (
+                          <input
+                            type="text"
+                            value={selectedSingleValue}
+                            onChange={(e) => handleAnswer(e.target.value)}
+                            placeholder="Digite sua resposta aqui..."
+                            className="w-full px-4 py-3 rounded-lg border border-white bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            style={{ fontFamily: '"Roboto", Sans-serif' }}
+                          />
+                        ) : isMultipleInputType(
+                            currentQuestionData.inputType
+                          ) ? (
+                          <div className="space-y-2">
+                            {currentQuestionData.options.map((option) => {
+                              const checked = selectedMultipleValue.includes(
+                                option.value
+                              );
+
+                              return (
+                                <button
+                                  key={option.value}
+                                  type="button"
+                                  onClick={() =>
+                                    handleMultipleAnswer(option.value)
+                                  }
+                                  className="w-full text-left flex items-center gap-2 text-white"
+                                >
+                                  <span
+                                    className={`h-4 w-4 border border-white rounded-sm inline-flex items-center justify-center ${
+                                      checked
+                                        ? "bg-white"
+                                        : "bg-transparent"
+                                    }`}
+                                  >
+                                    {checked && (
+                                      <span className="h-2 w-2 bg-teal-700 rounded-sm" />
+                                    )}
+                                  </span>
+
+                                  <span>{option.label}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <CustomRadio
+                            style={{ fontFamily: '"Roboto", Sans-serif' }}
+                            options={currentQuestionData.options}
+                            value={selectedSingleValue}
+                            onChange={handleAnswer}
+                          />
+                        )}
+
+                        <div className="grid grid-cols-2 gap-3 md:gap-5 mt-5 md:mt-7">
+                          {currentQuestion > 0 ? (
+                            <Button
+                              variant="outline"
+                              onClick={handleBack}
+                              className="bg-transparent border-gray-700 text-white hover:bg-gray-800 py-3 md:py-5 text-sm md:text-base"
+                              style={{
+                                fontFamily: '"Roboto", Sans-serif',
+                              }}
+                            >
+                              VOLTAR
+                            </Button>
+                          ) : (
+                            <div />
+                          )}
+
+                          <Button
+                            onClick={handleNext}
+                            disabled={
+                              !isCurrentQuestionAnswered ||
+                              isSubmittingAnswers
+                            }
+                            className={`bg-teal-600 hover:bg-teal-700 text-white py-3 md:py-5 text-sm md:text-base ${
+                              currentQuestion === 0 ? "col-span-2" : ""
+                            }`}
+                            style={{
+                              fontFamily: '"Roboto", Sans-serif',
+                            }}
+                          >
+                            {isLastQuestion
+                              ? isSubmittingAnswers
+                                ? "ENVIANDO..."
+                                : submitSuccess
                                 ? "ENVIADO"
                                 : "ENVIAR"
-                            : "PROXIMA"}
-                        </Button>
-                      </div>
-                    </>
-                  )}
+                              : "PROXIMA"}
+                          </Button>
+                        </div>
+                      </>
+                    )}
                 </div>
               </div>
 
@@ -264,10 +293,14 @@ export default function ContainerQuest({
           </div>
         </div>
       </section>
+
       <footer className="w-full bg-black h-[150px] flex items-center justify-center">
         <p
           className="text-gray-400 text-sm md:text-base text-center"
-          style={{ color: "#fff", fontFamily: '"Roboto", Sans-serif' }}
+          style={{
+            color: "#fff",
+            fontFamily: '"Roboto", Sans-serif',
+          }}
         >
           © 2023. All rights reserved. Politica de Privacidade.
         </p>
