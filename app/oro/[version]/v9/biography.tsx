@@ -22,7 +22,7 @@ export default function Biography() {
 
 	return (
 		<section
-			className={`md:min-h-[1606px] md:h-[1606px] flex flex-col items-center pb-14 p-4 md:p-0 justify-start overflow-hidden bg-[#031B22] bg-[url('/images/oro/v5/biografia_elton_mobile.webp')] md:bg-[url('/images/oro/v5/biografia_elton_desktop.webp')] bg-cover bg-top md:bg-center z-0`}
+			className={`md:min-h-[1606px] md:h-[1606px] flex flex-col items-center pb-14 p-4 md:p-0 justify-start overflow-hidden bg-[#031B22] bg-[url('/images/oro/v9/biografia_elton_mobile.webp')] md:bg-[url('/images/oro/v9/biografia_elton_desktop.webp')] bg-cover bg-top md:bg-center z-0`}
 		>
 			<div className="mx-auto sm:px-4 lg:w-[1080px] w-full">
 				<div className="mt-7 md:mt-24 text-center md:text-left">

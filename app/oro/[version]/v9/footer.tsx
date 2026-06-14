@@ -12,7 +12,7 @@ export default function Footer() {
                 </p>
             </div>
             <Image
-                src="/images//v21/logo-alianca-divergente.png"
+                src="/images/logo.png"
                 alt="Logomarca Aliança Divergente"
                 width={250}
                 height={32}

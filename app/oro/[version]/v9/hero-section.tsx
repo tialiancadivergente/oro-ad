@@ -34,7 +34,7 @@ export default function HeroSection({
 				<div className="w-full 2md:max-w-[600px] max-w-[440px] md:-mt-[20px]">
 					<div className="mt-[10px] md:mt-[30px] flex justify-center md:justify-start">
 						<Image
-							src="/images/oro/v5/logo_resgate_dos_otimistas.png"
+							src="/images/logo_resgate_dos_otimistas.png"
 							alt="Logo Resgate dos Otimistas"
 							width={424}
 							height={164}
