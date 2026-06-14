@@ -70,14 +70,14 @@ export default function ContainerQuest({
   return (
     <div>
       <section
-        className={`relative flex items-center justify-center overflow-hidden h-full dark:bg-[url('/images/v21/bg_leadscore.webp')] light:bg-[url('/images/oro/splashScreen.webp')] bg-cover bg-center`}
+        className={`relative flex items-center justify-center overflow-hidden h-full dark:bg-[url('/images/oro-ad/bg_leadscore.webp')] light:bg-[url('/images/oro/splashScreen.webp')] bg-cover bg-center`}
       >
         <div className="container mx-auto relative h-full px-4">
           <div className="flex flex-col items-center justify-center text-center py-8">
             <div className="w-full max-w-4xl mx-auto">
               <div className="mb-6 md:mb-8 flex justify-center">
                 <Image
-                  src={theme === "1" ? "/images/v21/logo_o_resgate_dos_otimistas.webp" : "/images/logo-o-resgate-dos-otimistas.png"}
+                  src={theme === "1" ? "/images/oro-ad/logo-oro-dark.webp" : "/images/logo-oro-dark.webp"}
                   alt="Logotipo Resgate dos otimistas"
                   width={424}
                   height={164}
