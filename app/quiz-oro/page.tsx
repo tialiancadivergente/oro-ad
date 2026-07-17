@@ -410,7 +410,7 @@ function QuizNewPageContent() {
       setSubmitSuccess(false);
       await submitLeadScore();
       setSubmitSuccess(true);
-      window.location.href = whatsappUrl;
+      // window.location.href = whatsappUrl;
     } catch (error) {
       console.error("Erro ao enviar respostas do quiz:", error);
       setSubmitError(formatRequestErrorMessage(error));

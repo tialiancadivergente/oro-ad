@@ -132,118 +132,120 @@ export default function ContainerQuest({
 												)}
 
 												{submitSuccess && (
-													<p className="mb-3 text-left text-sm !text-green-300">
+													<p className="mb-3 py-20 text-sm !text-green-300 text-center">
 														Respostas enviadas com sucesso.
 													</p>
 												)}
 
-												<div className="mb-4">
-													<div className="h-2 w-full rounded-full bg-white/20">
-														<div
-															className="h-2 rounded-full bg-teal-500 transition-all duration-300"
-															style={{ width: `${progress}%` }}
-														/>
-													</div>
-												</div>
+												{!submitSuccess && (
+													<>
+														<div className="mb-4">
+															<div className="h-2 w-full rounded-full bg-white/20">
+																<div
+																	className="h-2 rounded-full bg-teal-500 transition-all duration-300"
+																	style={{ width: `${progress}%` }}
+																/>
+															</div>
+														</div>
 
-												<h3
-													className="mb-4 text-center text-base font-medium text-white md:mb-5 md:text-left md:text-lg"
-													style={{
-														color: "#fff",
-														fontFamily: '"Roboto", Sans-serif',
-													}}
-												>
-													{currentQuestionData.question}
-												</h3>
-
-												{isOpenInputType(currentQuestionData.inputType) ? (
-													<input
-														type="text"
-														value={selectedSingleValue}
-														onChange={(event) =>
-															handleAnswer(event.target.value)
-														}
-														placeholder="Digite sua resposta aqui..."
-														className="w-full rounded-lg border border-white bg-transparent px-4 py-3 text-white placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
-														style={{ fontFamily: '"Roboto", Sans-serif' }}
-													/>
-												) : isMultipleInputType(
-														currentQuestionData.inputType
-													) ? (
-													<div className="space-y-2">
-														{currentQuestionData.options.map((option) => {
-															const checked =
-																selectedMultipleValue.includes(option.value);
-
-															return (
-																<button
-																	key={option.value}
-																	type="button"
-																	onClick={() =>
-																		handleMultipleAnswer(option.value)
-																	}
-																	className="flex w-full items-center gap-2 text-left text-white"
-																>
-																	<span
-																		className={`inline-flex h-4 w-4 items-center justify-center rounded-sm border border-white ${
-																			checked
-																				? "bg-white"
-																				: "bg-transparent"
-																		}`}
-																	>
-																		{checked && (
-																			<span className="h-2 w-2 rounded-sm bg-teal-700" />
-																		)}
-																	</span>
-
-																	<span>{option.label}</span>
-																</button>
-															);
-														})}
-													</div>
-												) : (
-													<CustomRadio
-														style={{ fontFamily: '"Roboto", Sans-serif' }}
-														options={currentQuestionData.options}
-														value={selectedSingleValue}
-														onChange={handleAnswer}
-													/>
-												)}
-
-												<div className="mt-5 grid grid-cols-2 gap-3 md:mt-7 md:gap-5">
-													{currentQuestion > 0 ? (
-														<Button
-															variant="outline"
-															onClick={handleBack}
-															className="border-gray-700 bg-transparent py-3 text-sm text-white hover:bg-gray-800 md:py-5 md:text-base"
-															style={{ fontFamily: '"Roboto", Sans-serif' }}
+														<h3
+															className="mb-4 text-center text-base font-medium text-white md:mb-5 md:text-left md:text-lg"
+															style={{
+																color: "#fff",
+																fontFamily: '"Roboto", Sans-serif',
+															}}
 														>
-															VOLTAR
-														</Button>
-													) : (
-														<div />
-													)}
+															{currentQuestionData.question}
+														</h3>
 
-													<Button
-														onClick={handleNext}
-														disabled={
-															!isCurrentQuestionAnswered ||
-															isSubmittingAnswers
-														}
-														className={`bg-teal-600 py-3 text-sm text-white hover:bg-teal-700 md:py-5 md:text-base ${
-															currentQuestion === 0 ? "col-span-2" : ""
-														}`}
-														style={{ fontFamily: '"Roboto", Sans-serif' }}
-													>
-														{isLastQuestion
-															? isSubmittingAnswers
-																? "ENVIANDO..."
-																: submitSuccess
-																	? "ENVIADO"
-																	: "ENVIAR"
-															: "PROXIMA"}
-													</Button>
-												</div>
+														{isOpenInputType(currentQuestionData.inputType) ? (
+															<input
+																type="text"
+																value={selectedSingleValue}
+																onChange={(event) =>
+																	handleAnswer(event.target.value)
+																}
+																placeholder="Digite sua resposta aqui..."
+																className="w-full rounded-lg border border-white bg-transparent px-4 py-3 text-white placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+																style={{ fontFamily: '"Roboto", Sans-serif' }}
+															/>
+														) : isMultipleInputType(
+															currentQuestionData.inputType
+														) ? (
+															<div className="space-y-2">
+																{currentQuestionData.options.map((option) => {
+																	const checked =
+																		selectedMultipleValue.includes(option.value);
+
+																	return (
+																		<button
+																			key={option.value}
+																			type="button"
+																			onClick={() =>
+																				handleMultipleAnswer(option.value)
+																			}
+																			className="flex w-full items-center gap-2 text-left text-white"
+																		>
+																			<span
+																				className={`inline-flex h-4 w-4 items-center justify-center rounded-sm border border-white ${checked
+																					? "bg-white"
+																					: "bg-transparent"
+																					}`}
+																			>
+																				{checked && (
+																					<span className="h-2 w-2 rounded-sm bg-teal-700" />
+																				)}
+																			</span>
+
+																			<span>{option.label}</span>
+																		</button>
+																	);
+																})}
+															</div>
+														) : (
+															<CustomRadio
+																style={{ fontFamily: '"Roboto", Sans-serif' }}
+																options={currentQuestionData.options}
+																value={selectedSingleValue}
+																onChange={handleAnswer}
+															/>
+														)}
+
+														<div className="mt-5 grid grid-cols-2 gap-3 md:mt-7 md:gap-5">
+															{currentQuestion > 0 ? (
+																<Button
+																	variant="outline"
+																	onClick={handleBack}
+																	className="border-gray-700 bg-transparent py-3 text-sm text-white hover:bg-gray-800 md:py-5 md:text-base"
+																	style={{ fontFamily: '"Roboto", Sans-serif' }}
+																>
+																	VOLTAR
+																</Button>
+															) : (
+																<div />
+															)}
+
+															<Button
+																onClick={handleNext}
+																disabled={
+																	!isCurrentQuestionAnswered ||
+																	isSubmittingAnswers
+																}
+																className={`bg-teal-600 py-3 text-sm text-white hover:bg-teal-700 md:py-5 md:text-base ${currentQuestion === 0 ? "col-span-2" : ""
+																	}`}
+																style={{ fontFamily: '"Roboto", Sans-serif' }}
+															>
+																{isLastQuestion
+																	? isSubmittingAnswers
+																		? "ENVIANDO..."
+																		: submitSuccess
+																			? "ENVIADO"
+																			: "ENVIAR"
+																	: "PROXIMA"}
+															</Button>
+														</div>
+													</>
+												)}
 											</>
 										)}
 								</div>
