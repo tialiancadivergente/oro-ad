@@ -48,6 +48,7 @@ export default function ContainerQuest({
 	handleNext,
 	isCurrentQuestionAnswered,
 	isSubmittingAnswers,
+	whatsappUrl,
 	theme,
 }: ContainerQuestProps) {
 	const progress = totalQuestions
@@ -160,9 +161,7 @@ export default function ContainerQuest({
 													<input
 														type="text"
 														value={selectedSingleValue}
-														onChange={(event) =>
-															handleAnswer(event.target.value)
-														}
+														onChange={(e) => handleAnswer(e.target.value)}
 														placeholder="Digite sua resposta aqui..."
 														className="w-full rounded-lg border border-white bg-transparent px-4 py-3 text-white placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
 														style={{ fontFamily: '"Roboto", Sans-serif' }}
@@ -247,6 +246,29 @@ export default function ContainerQuest({
 											</>
 										)}
 								</div>
+							</div>
+
+							<div className="mb-6 text-center text-white md:mb-8">
+								<p
+									className="mb-4 text-xs text-white md:mb-5 md:text-sm"
+									style={{ fontFamily: '"Roboto", Sans-serif' }}
+								>
+									Apos responder as questoes, toque no botao abaixo
+									<br className="hidden md:block" />
+									para receber o link e materiais do evento:
+								</p>
+
+								<Button
+									className="w-full max-w-sm rounded-3xl py-4 text-sm transition-opacity duration-300 hover:opacity-90 md:py-6 md:text-base"
+									onClick={() => window.open(whatsappUrl, "_blank")}
+									style={{
+										background:
+											"linear-gradient(96.48deg, #065100 -18.33%, #49E413 159.75%)",
+										fontFamily: '"Roboto", Sans-serif',
+									}}
+								>
+									Clique aqui para entrar no Grupo no WhatsApp
+								</Button>
 							</div>
 						</div>
 					</div>
