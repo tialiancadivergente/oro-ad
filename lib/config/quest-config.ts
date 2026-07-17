@@ -1,5 +1,5 @@
 export const DEFAULT_QUEST_FORM_VERSION_ID =
-  "c0909c2f-4bb6-49fe-8fac-7153076f6781";
+  "46658ce7-45f1-473a-ae4b-34f705f56f84";
 
 const QUEST_WHATSAPP_URL_BY_TEMPERATURE = {
   f: "",
