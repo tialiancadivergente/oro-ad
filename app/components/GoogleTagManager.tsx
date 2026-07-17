@@ -11,8 +11,8 @@ const GoogleTagManager = () => {
     const userIp = useUserIP(); // Captura o IP no carregamento
     console.log('meu ip =>', userIp);
     useEffect(() => {
-        const defaultGtmId = 'GTM-K25DQZDB';
-        const oroOrgGtmId = 'GTM-K25DQZDB';
+        const defaultGtmId = '';
+        const oroOrgGtmId = '';
         const normalizedTemperature = (Array.isArray(temperature) ? temperature[0] : temperature || '').toLowerCase();
         const normalizedSlug = (Array.isArray(slug) ? slug : slug ? [slug] : [])
             .map((segment) => segment.toLowerCase());

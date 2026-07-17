@@ -24,7 +24,7 @@ export default function HeroSection({
 		<section
 			id="hero"
 			aria-labelledby="hero-title"
-			className="relative z-0 flex h-auto w-full flex-col items-center overflow-hidden bg-[#104448] px-4 pb-7 pt-6 md:h-[902px] md:px-6 md:pb-16 md:pt-12"
+			className="relative z-0 flex min-h-[900px] w-full flex-col items-center overflow-hidden bg-[#104448] px-4 pb-12 pt-6 md:h-[902px] md:min-h-0 md:px-6 md:pb-16 md:pt-12"
 		>
 			<div className="mx-auto flex w-full max-w-[1280px] flex-col items-center">
 				<Image
